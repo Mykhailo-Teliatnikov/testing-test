@@ -10,7 +10,7 @@ spec:
       type: string
   steps:
   - name: check-files
-    workingDir: $(workspaces.source.path)/fastapi
+    workingDir: $(workspaces.source.path)
     image: alpine/git
     script: |
       git clone $(params.repo-url)
