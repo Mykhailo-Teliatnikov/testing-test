@@ -1,14 +1,14 @@
 Инструкции
 
-#1) Установка докера и миникуба
+##1) Установка докера и миникуба
 
-/#!/bin/bash
+#!/bin/bash
 
 set -ex
 
 apt-get -y update
 
-## docker install
+# docker install
 apt-get install ca-certificates curl gnupg
 
 install -m 0755 -d /etc/apt/keyrings
@@ -24,22 +24,22 @@ apt-get update
 
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-## install minikube
+# install minikube
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 install minikube-linux-amd64 /usr/local/bin/minikube
 
 minikube start
 
-##config kubectl on minikube
+#config kubectl on minikube
 minikube kubectl -- get po -A
 
 alias kubectl="minikube kubectl --"
 
-#2) Установка Tekton
+##2) Установка Tekton
 
 kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
  
-##tkn install
+#tkn install
 curl -LO https://github.com/tektoncd/cli/releases/download/v0.31.1/tektoncd-cli-0.31.1_Linux-64bit.deb
 sudo dpkg -i ./tektoncd-cli-0.31.1_Linux-64bit.deb
 

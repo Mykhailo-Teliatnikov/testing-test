@@ -10,6 +10,7 @@ spec:
     workingDir: $(workspaces.source.path)
     image: bash
     script: |
+      ls -al
       cat <<EOF > Dockerfile
       FROM python:3.9.17
 
