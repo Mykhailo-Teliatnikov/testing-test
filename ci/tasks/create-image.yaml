@@ -10,7 +10,7 @@ spec:
   - name: source
   steps:
   - name: build-image
-    workingDir: $(workspaces.source.path)/fastapi
+    workingDir: $(workspaces.source.path)/testing-test/fastapi
     image: docker
     volumeMounts:
       - name: docker-socket
@@ -19,7 +19,7 @@ spec:
       docker build -t krotym2/fastapi .
       echo "3"
   - name: push-image
-    workingDir: $(workspaces.source.path)/fastapi
+    workingDir: $(workspaces.source.path)/testing-test/fastapi
     image: docker
     volumeMounts:
       - name: docker-socket

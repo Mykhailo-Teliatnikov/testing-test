@@ -7,7 +7,7 @@ spec:
   - name: source
   steps:
   - name: create-yaml
-    workingDir: $(workspaces.source.path)/kuber
+    workingDir: $(workspaces.source.path)/testing-test/kuber
     image: bash
     script: |
       cat deployment.yaml
@@ -16,7 +16,7 @@ spec:
       echo "---"
       echo "5"
   - name: deploy-image
-    workingDir: $(workspaces.source.path)/kuber
+    workingDir: $(workspaces.source.path)/testing-test/kuber
     image: lachlanevenson/k8s-kubectl
     script: |
       kubectl apply -f deployment.yaml

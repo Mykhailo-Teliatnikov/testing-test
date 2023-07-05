@@ -7,7 +7,7 @@ spec:
   - name: source
   steps:
   - name: check-files
-    workingDir: $(workspaces.source.path)/fastapi
+    workingDir: $(workspaces.source.path)/testing-test/fastapi
     image: bash
     script: |
       pwd
