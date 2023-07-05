@@ -14,4 +14,6 @@ sudo dpkg -i ./tektoncd-cli-0.31.1_Linux-64bit.deb
 
 #3)Python FastApi
 
+tkn hub install task git-clone
+
 tkn pipelinerun logs run-fast-api -f

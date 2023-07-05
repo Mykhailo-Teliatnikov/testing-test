@@ -12,6 +12,8 @@ spec:
     script: |
       pwd
       ls -al
+      echo "---"
       cat Dockerfile
+      echo "---"
       cat main.py
       echo "1"

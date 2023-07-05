@@ -11,6 +11,7 @@ spec:
     image: bash
     script: |
       cat  pod.yaml
+      echo "---"
       echo "5"
   - name: deploy-image
     workingDir: $(workspaces.source.path)/kuber
