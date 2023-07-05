@@ -42,7 +42,7 @@ spec:
     - name: IMAGE
       value: $(params.image-reference)
   - name: deploy-image
-    runAfter: ["create-image"]
+    runAfter: ["build-push"]
     taskRef:
       name: deploy-image
     workspaces:
