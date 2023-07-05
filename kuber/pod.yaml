@@ -6,4 +6,6 @@ spec:
   containers:
   - name: fastapi
     image: krotym2/fastapi:latest
+    ports:
+    - containerPort: 8000
     command: ["uvicorn", "main:app", "--reload"]
