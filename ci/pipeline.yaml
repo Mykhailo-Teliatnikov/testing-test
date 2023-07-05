@@ -22,13 +22,14 @@ spec:
     - name: url
       value: $(params.repo-url)
   - name: check-files
+    runAfter: ["fetch-source"]
     taskRef:
       name: check-files
     workspaces:
     - name: source
       workspace: shared-data
   - name: create-image
-    runAfter: ["fetch-source"]
+    runAfter: ["check-files"]
     taskRef:
       name: create-image
     workspaces:
