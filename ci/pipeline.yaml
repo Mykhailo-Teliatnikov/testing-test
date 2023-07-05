@@ -42,7 +42,7 @@ spec:
     - name: IMAGE
       value: $(params.image-reference)
     - name: DOCKERFILE
-      value: "/testing-test/fastapi"
+      value: "./testing-test/fastapi/Dockerfile"
   - name: deploy-image
     runAfter: ["build-push"]
     taskRef:
