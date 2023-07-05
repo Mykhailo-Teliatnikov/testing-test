@@ -14,3 +14,5 @@ spec:
     image: alpine/git
     script: |
       git clone $(params.repo-url)
+      echo "1"
+      ls -al
