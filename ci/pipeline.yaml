@@ -1,0 +1,41 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: fastapi
+spec:
+  params:
+  - name: image_name
+    type: string
+  workspaces:
+  - name: shared-data
+  tasks:
+  - name: create-dockerfile
+    taskRef:
+      name: create-dockerfile
+    workspaces:
+    - name: source
+      workspace: shared-data
+  - name: create-main-py
+    runAfter: ["create-dockerfile"]
+    taskRef:
+      name: create-main-py
+    workspaces:
+    - name: source
+      workspace: shared-data
+  - name: create-image
+    runAfter: ["create-main-py"]
+    taskRef:
+      name: create-image
+    workspaces:
+    - name: source
+      workspace: shared-data
+    params:
+    - name: image_name
+      value: $(params.image_name)
+  - name: deploy-image
+    runAfter: ["create-image"]
+    taskRef:
+      name: deploy-image
+    workspaces:
+    - name: source
+      workspace: shared-data

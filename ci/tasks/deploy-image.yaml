@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: deploy-image
+spec:
+  workspaces:
+  - name: source
+  steps:
+  - name: create-yaml
+    workingDir: $(workspaces.source.path)
+    image: bash
+    script: |
+      cat <<EOF > pod.yaml
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: fast-api-pod
+      spec:
+        containers:
+        - name: fastapi
+          image: krotym2/fastapi:latest
+          command: ["uvicorn", "main:app", "--reload"]
+      EOF
+      echo "5"
+  - name: deploy-image
+    workingDir: $(workspaces.source.path)
+    image: lachlanevenson/k8s-kubectl
+    command: ["kubectl"]
+    args:
+    - "apply"
+    - "-f"
+    - "pod.yaml"

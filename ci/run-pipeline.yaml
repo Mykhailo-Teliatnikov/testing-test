@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: run-fast-api
+spec:
+  serviceAccountName: build-bot
+  pipelineRef:
+    name: fastapi
+  params:
+  - name: image_name
+    value: "test1238456"
+  workspaces:
+  - name: docker-login
+    secret:
+      secretName: docker-login
+  - name: shared-data
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi

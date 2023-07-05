@@ -1,0 +1,33 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: create-image
+spec:
+  params:
+  - name: image_name
+    type: string
+  workspaces:
+  - name: source
+  steps:
+  - name: build-image
+    workingDir: $(workspaces.source.path)
+    image: docker
+    volumeMounts:
+      - name: docker-socket
+        mountPath: /var/run/docker.sock
+    script: |
+      docker build -t krotym2/fastapi .
+      echo "3"
+  - name: push-image
+    workingDir: $(workspaces.source.path)
+    image: docker
+    volumeMounts:
+      - name: docker-socket
+        mountPath: /var/run/docker.sock
+    script: |
+      docker push krotym2/fastapi
+      echo "4"
+  volumes:
+  - name: docker-socket
+    hostPath:
+      path: /var/run/docker.sock

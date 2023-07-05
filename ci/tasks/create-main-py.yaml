@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: create-main-py
+spec:
+  workspaces:
+  - name: source
+  steps:
+  - name: add-main-py
+    workingDir: $(workspaces.source.path)
+    image: bash
+    script: |
+      cat <<EOF > main.py
+      from typing import Union
+      from fastapi import FastAPI
+      app = FastAPI()
+      @app.get("/")
+      def read_root():
+        return {"Hello": "World"}
+      @app.get("/items/{item_id}")
+      def read_item(item_id: int, q: Union[str, None] = None):
+        return {"item_id": item_id, "q": q}
+      EOF
+      echo "2"

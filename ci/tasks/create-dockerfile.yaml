@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: create-dockerfile
+spec:
+  workspaces:
+  - name: source
+  steps:
+  - name: add-dockerfile
+    workingDir: $(workspaces.source.path)
+    image: bash
+    script: |
+      cat <<EOF > Dockerfile
+      FROM python:3.9.17
+
+      COPY main.py /main.py
+
+      RUN pip install fastapi "uvicorn[standard]"
+
+      EXPOSE 8000
+      WORKDIR /
+      CMD ["uvicorn", "main:app", "--reload"]
+
+      EOF
+      echo "1"
