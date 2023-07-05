@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fast-api-pod
+spec:
+  containers:
+  - name: fastapi
+    image: krotym2/fastapi:latest
+    command: ["uvicorn", "main:app", "--reload"]

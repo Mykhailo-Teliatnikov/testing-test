@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: check-files
+spec:
+  workspaces:
+  - name: source
+  steps:
+  - name: check-files
+    workingDir: $(workspaces.source.path)/fastapi
+    image: bash
+    script: |
+      pwd
+      ls -al
+      cd fastapi
+      cat Dockerfile
+      cat main.py
+      echo "1"

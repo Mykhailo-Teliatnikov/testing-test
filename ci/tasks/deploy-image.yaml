@@ -7,23 +7,13 @@ spec:
   - name: source
   steps:
   - name: create-yaml
-    workingDir: $(workspaces.source.path)
+    workingDir: $(workspaces.source.path)/kuber
     image: bash
     script: |
-      cat <<EOF > pod.yaml
-      apiVersion: v1
-      kind: Pod
-      metadata:
-        name: fast-api-pod
-      spec:
-        containers:
-        - name: fastapi
-          image: krotym2/fastapi:latest
-          command: ["uvicorn", "main:app", "--reload"]
-      EOF
+      cat  pod.yaml
       echo "5"
   - name: deploy-image
-    workingDir: $(workspaces.source.path)
+    workingDir: $(workspaces.source.path)/kuber
     image: lachlanevenson/k8s-kubectl
     command: ["kubectl"]
     args:

@@ -21,22 +21,14 @@ spec:
     params:
     - name: url
       value: $(params.repo-url)
-
-  - name: create-dockerfile
+  - name: check-files
     taskRef:
-      name: create-dockerfile
-    workspaces:
-    - name: source
-      workspace: shared-data
-  - name: create-main-py
-    runAfter: ["create-dockerfile"]
-    taskRef:
-      name: create-main-py
+      name: check-files
     workspaces:
     - name: source
       workspace: shared-data
   - name: create-image
-    runAfter: ["create-main-py"]
+    runAfter: ["fetch-source"]
     taskRef:
       name: create-image
     workspaces:
