@@ -10,7 +10,9 @@ spec:
     workingDir: $(workspaces.source.path)/kuber
     image: bash
     script: |
-      cat  pod.yaml
+      cat deployment.yaml
+      cat service.yaml
+      cat ingress.yaml
       echo "---"
       echo "5"
   - name: deploy-image

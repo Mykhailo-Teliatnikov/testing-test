@@ -10,3 +10,4 @@ spec:
       port: 80
       targetPort: fastapi
       name: fastapi
+  type: NodePort
