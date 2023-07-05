@@ -10,11 +10,24 @@ spec:
   - name: source
   steps:
   - name: build-image
-    image: gcr.io/kaniko-project/executor:debug
-    workingDir: $(workspaces.source.path)/testing-test/fastapi
-    command:
-      - /kaniko/executor
-    args:
-      - --dockerfile=Dockerfile
-      - --context=$(workspaces.source.path)/testing-test/fastapi
-      - --destination="krotym2/fastapi"
+    workingDir: $(workspaces.source.path)/fastapi
+    image: docker
+    volumeMounts:
+      - name: docker-socket
+        mountPath: /var/run/docker.sock
+    script: |
+      docker build -t krotym2/fastapi .
+      echo "3"
+  - name: push-image
+    workingDir: $(workspaces.source.path)/fastapi
+    image: docker
+    volumeMounts:
+      - name: docker-socket
+        mountPath: /var/run/docker.sock
+    script: |
+      docker push krotym2/fastapi
+      echo "4"
+  volumes:
+  - name: docker-socket
+    hostPath:
+      path: /var/run/docker.sock

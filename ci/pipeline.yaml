@@ -28,16 +28,18 @@ spec:
     workspaces:
     - name: source
       workspace: shared-data
-  - name: create-image
+  - name: build-push
     runAfter: ["check-files"]
     taskRef:
-      name: create-image
+      name: kaniko
     workspaces:
-    - name: source
-      workspace: shared-data
+      - name: source
+        workspace: shared-data
+      - name: dockerconfig
+        workspace: docker-login
     params:
-    - name: image_name
-      value: $(params.image_name)
+    - name: IMAGE
+      value: $(params.image-reference)
   - name: deploy-image
     runAfter: ["create-image"]
     taskRef:

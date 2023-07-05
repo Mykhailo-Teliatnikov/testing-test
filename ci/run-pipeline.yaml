@@ -7,10 +7,10 @@ spec:
   pipelineRef:
     name: fastapi
   params:
-  - name: image_name
-    value: "test1238456"
-  - name: repo-url
-    value: https://github.com/Mykhailo-Teliatnikov/testing-test.git
+    - name: image-reference
+      value: docker.io/krotym2/fastapi
+    - name: repo-url
+      value: https://github.com/Mykhailo-Teliatnikov/testing-test.git
   workspaces:
   - name: docker-login
     secret:
