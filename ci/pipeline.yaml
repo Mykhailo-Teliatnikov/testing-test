@@ -14,12 +14,12 @@ spec:
   tasks:
   - name: fetch-source
     taskRef:
-      name: git-clone
+      name: git-clone-my
     workspaces:
-    - name: output
+    - name: source
       workspace: shared-data
     params:
-    - name: url
+    - name: repo-url
       value: $(params.repo-url)
   - name: check-files
     runAfter: ["fetch-source"]
