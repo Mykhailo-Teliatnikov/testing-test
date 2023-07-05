@@ -4,13 +4,14 @@ metadata:
   name: fastapi
 spec:
   params:
-  - name: image_name
-    type: string
   - name: repo-url
     type: string
     description: The git repo URL to clone from.
+  - name: image-reference
+    type: string
   workspaces:
-  - name: shared-data
+    - name: shared-data
+    - name: docker-login
   tasks:
   - name: fetch-source
     taskRef:
