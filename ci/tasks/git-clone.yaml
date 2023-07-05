@@ -11,6 +11,6 @@ spec:
   steps:
   - name: check-files
     workingDir: $(workspaces.source.path)/fastapi
-    image: bash
+    image: alpine/git
     script: |
       git clone $(params.repo-url)
