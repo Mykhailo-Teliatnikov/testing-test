@@ -16,8 +16,10 @@ spec:
   - name: deploy-image
     workingDir: $(workspaces.source.path)/kuber
     image: lachlanevenson/k8s-kubectl
-    command: ["kubectl"]
-    args:
-    - "apply"
-    - "-f"
-    - "pod.yaml"
+    script: |
+      kubectl apply -f deployment.yaml
+      kubectl apply -f service.yaml
+      kubectl apply -f ingress.yaml
+      echo "---"
+      echo "6"
+
